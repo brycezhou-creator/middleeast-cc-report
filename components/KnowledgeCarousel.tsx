@@ -41,10 +41,10 @@ export const KnowledgeCarousel = ({ vocabularyItems }: KnowledgeCarouselProps) =
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-dark font-bold text-lg flex items-center gap-2">
           <Sparkles className="text-brand fill-brand" size={20} />
-          今日知识锦囊
+          Today's Vocabulary
         </h3>
         <div className="bg-brand/10 text-brand text-xs font-bold px-2 py-1 rounded-full">
-          {vocabularyItems.length} 个新词
+          {vocabularyItems.length} new words
         </div>
       </div>
 
@@ -73,29 +73,27 @@ export const KnowledgeCarousel = ({ vocabularyItems }: KnowledgeCarouselProps) =
               <p className="text-gray-500 text-xs mb-3">{item.translation}</p>
 
               {/* Rating */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex gap-0.5">{renderStars(item.rating)}</div>
-                <span className="text-[10px] font-bold text-success">{item.ratingLabel}</span>
+              <div className="flex gap-0.5 mb-3">
+                {renderStars(item.rating)}
               </div>
 
               {/* Play Button */}
               <button
                 onClick={() => handlePlayAudio(item)}
-                className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg transition-all ${
-                  playingId === item.id
-                    ? 'bg-brand text-royal shadow-inner'
-                    : 'bg-royal text-white hover:bg-royal/90 shadow-sm'
-                }`}
+                className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg transition-all ${playingId === item.id
+                  ? 'bg-brand text-royal shadow-inner'
+                  : 'bg-royal text-white hover:bg-royal/90 shadow-sm'
+                  }`}
               >
                 {playingId === item.id ? (
                   <>
                     <Pause size={14} fill="currentColor" />
-                    <span className="text-xs font-bold">播放中...</span>
+                    <span className="text-xs font-bold">Playing...</span>
                   </>
                 ) : (
                   <>
                     <Play size={14} fill="currentColor" />
-                    <span className="text-xs font-bold">听 Sara 发音</span>
+                    <span className="text-xs font-bold">Listen to Sara</span>
                   </>
                 )}
               </button>
@@ -114,9 +112,11 @@ export const KnowledgeCarousel = ({ vocabularyItems }: KnowledgeCarouselProps) =
       {/* Bottom Tip */}
       <div className="mt-4 flex items-center gap-2 text-xs text-gray-400 bg-gray-50 p-3 rounded-lg">
         <Info size={14} className="text-brand flex-shrink-0" />
-        <span>左右滑动查看更多，点击播放按钮听 Sara 的原音重现</span>
+        <span>Swipe to see more, tap to hear Sara's pronunciation</span>
       </div>
     </div>
   );
 };
+
+
 

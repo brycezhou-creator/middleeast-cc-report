@@ -12,28 +12,27 @@ export const TeacherMessageSection = ({ teacher }: TeacherMessageSectionProps) =
 
   return (
     <section className="px-5 mt-10 mb-8">
-      <h3 className="text-white font-bold text-lg mb-4">来自老师的寄语</h3>
+      <h3 className="text-white font-bold text-lg mb-4">Message from Teacher</h3>
       <div className="bg-surface rounded-2xl p-5 shadow-card">
         <div className="flex items-center gap-4 mb-4">
           <img src={teacher.avatar} alt="Teacher" className="w-14 h-14 rounded-full border-2 border-gray-100" />
           <div>
             <h4 className="text-dark font-bold text-lg">{teacher.name}</h4>
             <div className="flex items-center gap-1 text-xs text-gray-500">
-              <span className="text-brand">★</span> 5.0 评分认证
+              <span className="text-brand">★</span> 5.0 Certified
             </div>
           </div>
         </div>
 
         {/* Audio Player Sim */}
-        <button 
+        <button
           onClick={() => setIsAudioPlaying(!isAudioPlaying)}
-          className={`w-full p-3 rounded-xl mb-4 flex items-center justify-center gap-2 transition-all ${
-            isAudioPlaying ? 'bg-brand text-royal shadow-inner' : 'bg-royal text-white shadow-md'
-          }`}
+          className={`w-full p-3 rounded-xl mb-4 flex items-center justify-center gap-2 transition-all ${isAudioPlaying ? 'bg-brand text-royal shadow-inner' : 'bg-royal text-white shadow-md'
+            }`}
         >
           {isAudioPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
           <span className="font-bold text-sm">
-            {isAudioPlaying ? "正在播放寄语..." : "听听老师的语音"}
+            {isAudioPlaying ? "Playing message..." : "Listen to voice message"}
           </span>
         </button>
 
@@ -47,17 +46,19 @@ export const TeacherMessageSection = ({ teacher }: TeacherMessageSectionProps) =
               </p>
             </div>
           </div>
-          
-          <button 
+
+          <button
             onClick={() => setIsTranslated(!isTranslated)}
             className="mt-3 flex items-center gap-1 text-xs font-bold text-royal hover:underline ms-auto w-fit"
           >
             <Languages size={14} />
-            {isTranslated ? "Show Original" : "翻译成中文"}
+            {isTranslated ? "Show Original" : "Show Arabic"}
           </button>
         </div>
       </div>
     </section>
   );
 };
+
+
 

@@ -92,8 +92,8 @@ export interface StudentData {
 export const reportData: StudentData = {
   name: "Sara",
   avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Sara&backgroundColor=b6e3f4&skinColor=ecad80&hair=long16&hairColor=0e0e0e&eyes=variant01&eyebrows=variant01&mouth=variant01",
-  levelCurrent: "Level 2 (基础会话)",
-  levelTarget: "Level 3 (故事表达)",
+  levelCurrent: "Level 2 (Basic Conversation)",
+  levelTarget: "Level 3 (Story Telling)",
   badges: [
     { id: "b1", icon: "🌟", label: "Super Speaker", color: "#FDE700" },
     { id: "b2", icon: "🦁", label: "Brave Heart", color: "#FDE700" }
@@ -110,36 +110,18 @@ export const reportData: StudentData = {
   ],
   vocabularyMastery: [
     {
-      id: "v1",
-      word: "Supermarket",
-      translation: "超市",
-      imageUrl: "https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?w=400&h=300&fit=crop",
-      rating: 3,
-      ratingLabel: "Perfect!",
-      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-07.mp3" // Placeholder
-    },
-    {
-      id: "v2",
-      word: "Fresh",
-      translation: "新鲜的",
-      imageUrl: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=300&fit=crop",
-      rating: 3,
-      ratingLabel: "Perfect!",
-      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-08a.mp3"
-    },
-    {
-      id: "v3",
-      word: "Apple",
-      translation: "苹果",
-      imageUrl: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop",
-      rating: 3,
-      ratingLabel: "Perfect!",
-      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-09.mp3"
+      id: "v6",
+      word: "Carrot",
+      translation: "جزر",
+      imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=300&fit=crop",
+      rating: 1,
+      ratingLabel: "Good",
+      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-02.mp3"
     },
     {
       id: "v4",
       word: "Vegetable",
-      translation: "蔬菜",
+      translation: "خضروات",
       imageUrl: "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=400&h=300&fit=crop",
       rating: 2,
       ratingLabel: "Great!",
@@ -148,62 +130,80 @@ export const reportData: StudentData = {
     {
       id: "v5",
       word: "Shopping Cart",
-      translation: "购物车",
+      translation: "عربة التسوق",
       imageUrl: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&h=300&fit=crop",
       rating: 2,
       ratingLabel: "Great!",
       studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-01a.mp3"
     },
     {
-      id: "v6",
-      word: "Carrot",
-      translation: "胡萝卜",
-      imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=300&fit=crop",
-      rating: 1,
-      ratingLabel: "Good",
-      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-02.mp3"
+      id: "v1",
+      word: "Supermarket",
+      translation: "سوبر ماركت",
+      imageUrl: "https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?w=400&h=300&fit=crop",
+      rating: 3,
+      ratingLabel: "Perfect!",
+      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-07.mp3" // Placeholder
+    },
+    {
+      id: "v2",
+      word: "Fresh",
+      translation: "طازج",
+      imageUrl: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=300&fit=crop",
+      rating: 3,
+      ratingLabel: "Perfect!",
+      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-08a.mp3"
+    },
+    {
+      id: "v3",
+      word: "Apple",
+      translation: "تفاحة",
+      imageUrl: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop",
+      rating: 3,
+      ratingLabel: "Perfect!",
+      studentAudioUrl: "https://www.soundjay.com/button/sounds/beep-09.mp3"
     }
   ],
   radarData: [
     {
-      subject: '词汇量',
-      student: 90,
+      subject: 'Vocabulary',
+      student: 68,
+      average: 78,
+      fullMark: 100,
+      analysis: "Sara has a foundation in everyday vocabulary, but her word bank needs expansion, especially in descriptive words and academic terms.",
+      tip: "Introduce graded readers and picture books to systematically build vocabulary across different themes."
+    },
+    {
+      subject: 'Grammar',
+      student: 72,
       average: 75,
       fullMark: 100,
-      analysis: "Sara 掌握的高频词汇量远超同龄人，尤其在日常生活场景（如超市、学校）的词汇运用非常准确。",
-      tip: "建议开始尝试简单的英文绘本阅读，进一步扩充形容词储备。"
+      analysis: "Sara understands basic sentence structures but sometimes struggles with tense consistency and subject-verb agreement.",
+      tip: "Focus on interactive grammar games and sentence-building activities to reinforce patterns naturally."
     },
     {
-      subject: '语法',
-      student: 85,
-      average: 80,
+      subject: 'Fluency',
+      student: 75,
+      average: 72,
       fullMark: 100,
-      analysis: "能够正确使用一般现在时和现在进行时，但在第三人称单数的变化上偶尔会有些许犹豫。",
-      tip: "可以通过角色扮演游戏练习 'He/She likes...' 等句型。"
+      analysis: "Sara speaks at a comfortable pace without too many hesitations. This is one of her stronger areas compared to peers.",
+      tip: "Continue daily English conversations and storytelling practice to maintain this natural rhythm."
     },
     {
-      subject: '流利度',
-      student: 95,
+      subject: 'Confidence',
+      student: 78,
       average: 70,
       fullMark: 100,
-      analysis: "语速适中，停顿自然。最难得的是在思考时会使用 'Let me see...' 等自然的填充词，非常地道。",
-      tip: "保持每天 15 分钟的口语磨耳朵，维持语感。"
+      analysis: "Sara shows excellent willingness to communicate! She actively participates and isn't afraid to make mistakes - a crucial trait for language learning.",
+      tip: "Channel this confidence into group discussions and presentations to further develop public speaking skills."
     },
     {
-      subject: '互动自信',
-      student: 98,
-      average: 65,
+      subject: 'Pronunciation',
+      student: 65,
+      average: 80,
       fullMark: 100,
-      analysis: "这是 Sara 最突出的强项！她不仅回答问题，还会主动向老师提问，展现了极强的沟通意愿。",
-      tip: "鼓励她参加更多的小组讨论课，发挥领导力潜力。"
-    },
-    {
-      subject: '发音',
-      student: 88,
-      average: 75,
-      fullMark: 100,
-      analysis: "元音发音饱满清晰，辅音连读（Linkage）处理得很好。'Th' 的咬舌音还可以更标准一些。",
-      tip: "可以通过模仿绕口令（Tongue Twisters）来微调咬舌音。"
+      analysis: "Sara's pronunciation needs focused attention. Some vowel sounds are unclear, and certain consonant combinations are challenging for her.",
+      tip: "Regular phonics drills and pronunciation coaching with native teachers will make a significant difference here."
     },
   ],
   teacher: {
@@ -211,20 +211,20 @@ export const reportData: StudentData = {
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma&backgroundColor=ffdfbf",
     messageAudio: "#",
     comment: "Sara showed amazing confidence today! Her pronunciation of 'supermarket' was perfect. I can see her potential for international schools.",
-    commentTranslated: "Sara 今天表现出了惊人的自信！她对 'supermarket' 的发音非常完美。我看到了她进入国际学校的潜力。"
+    commentTranslated: "Sara displayed amazing confidence today! Her pronunciation of 'supermarket' was perfect. I can see her potential for international schools."
   },
   pathMilestones: [
     {
       id: "m1",
       type: "ability",
       timeframe: "1 Month Later",
-      title: "自信自我介绍",
-      description: "能够使用 5+ 个句子流畅介绍自己的爱好和家庭。",
+      title: "Confident Self-Introduction",
+      description: "Able to fluently introduce hobbies and family using 5+ sentences.",
       iconType: "star",
       packageId: "pkg_month",
-      potentialAnalysis: "基于 Sara 现有的词汇量（90/100），她只需要学会更复杂的句型结构来串联这些词汇。",
-      educationalValue: "自我介绍是社交自信的第一步，能帮助孩子在陌生的英语环境中迅速建立安全感。",
-      methodology: "我们将通过‘我是小记者’等角色扮演游戏，让她在不知不觉中重复练习高频句型。"
+      potentialAnalysis: "Based on Sara's existing vocabulary (68/100), she needs to learn more complex sentence structures to connect these words effectively.",
+      educationalValue: "Self-introduction is the first step to social confidence, helping children quickly establish a sense of security in unfamiliar English environments.",
+      methodology: "We'll use role-playing games like 'Young Reporter' to help her practice high-frequency sentence patterns naturally and repeatedly."
     },
     {
       id: "m2",
@@ -234,54 +234,54 @@ export const reportData: StudentData = {
       description: "不再蹦单词！掌握 'Subject + Verb + Object' 完整句型结构。",
       iconType: "zap",
       packageId: "pkg_two_months",
-      potentialAnalysis: "Sara 的语法基础很扎实，但在第三人称单数上偶尔犹豫，通过专项练习可以迅速纠正。",
-      educationalValue: "完整句输出是逻辑思维的体现，也是从‘单词思维’向‘英语思维’转变的关键分水岭。",
-      methodology: "我们的外教将使用‘扩句法’（Sentence Expansion），引导她把简单的 Short Answer 变成完整的描述。"
+      potentialAnalysis: "Sara has a solid grammar foundation, but occasionally hesitates with third-person singular. This can be quickly corrected through targeted practice.",
+      educationalValue: "Complete sentence output demonstrates logical thinking and marks the crucial transition from 'word-based thinking' to 'English thinking'.",
+      methodology: "Our foreign teachers will use 'Sentence Expansion' techniques to guide her in transforming simple short answers into complete descriptions."
     },
     {
       id: "m3",
       type: "target",
       timeframe: "3 Months Goal",
-      title: "Level 3 (故事表达)",
-      description: "能够独立复述绘本故事，达到国际学校入学面试基准。",
+      title: "Level 3 (Story Telling)",
+      description: "Able to independently retell picture book stories, meeting international school interview standards.",
       iconType: "flag",
       packageId: "pkg_quarter",
-      potentialAnalysis: "鉴于 Sara 极强的互动自信（98/100），她非常适合通过讲故事来展示语言魅力。",
-      educationalValue: "故事复述能力不仅考察语言，更考察记忆力、逻辑排序和情感表达，是国际学校面试的核心考察点。",
-      methodology: "引入经典的绘本教材，通过‘看图说话’和‘结局猜想’环节，激发她主动表达长段落的欲望。"
+      potentialAnalysis: "Given Sara's exceptional confidence (78/100), she's well-suited to showcase her language skills through storytelling.",
+      educationalValue: "Story retelling assesses not just language, but also memory, logical sequencing, and emotional expression - key evaluation points in international school interviews.",
+      methodology: "We'll introduce classic picture book materials, using 'Picture Description' and 'Ending Prediction' activities to inspire her to express longer narratives independently."
     }
   ],
   packages: {
     "pkg_month": {
       id: "pkg_month",
-      title: "1个月·基础巩固",
+      title: "1 Month · Foundation",
       lessonCount: 12,
-      frequency: "每周 3 课时",
+      frequency: "3 lessons/week",
       price: "$199",
-      tags: ["短期尝试", "夯实基础"]
+      tags: ["Short-term Trial", "Build Foundation"]
     },
     "pkg_two_months": {
       id: "pkg_two_months",
-      title: "2个月·进阶突破",
+      title: "2 Months · Breakthrough",
       lessonCount: 24,
-      frequency: "每周 3 课时",
+      frequency: "3 lessons/week",
       price: "$379",
-      tags: ["成效显著", "句型突破"]
+      tags: ["Proven Results", "Sentence Mastery"]
     },
     "pkg_quarter": {
       id: "pkg_quarter",
-      title: "3个月·思维飞跃",
+      title: "3 Months · Fluency Leap",
       lessonCount: 36,
-      frequency: "每周 3 课时",
+      frequency: "3 lessons/week",
       price: "$499",
-      tags: ["国际学校备考", "完整体系"]
+      tags: ["Int'l School Prep", "Complete System"]
     }
   },
   sharePoster: {
     studentName: "Sara",
     studentAvatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Sara&backgroundColor=b6e3f4&skinColor=ecad80&hair=long16&hairColor=0e0e0e&eyes=variant01&eyebrows=variant01&mouth=variant01",
-    honorTitle: "小小演说家",
-    percentile: 85, // Sara 超越了 85% 的同龄人
+    honorTitle: "Rising Star Speaker",
+    percentile: 85, // Sara surpasses 85% of peers
     qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.51talk.com/trial",
     brandLogoUrl: "https://via.placeholder.com/120x40/00B4EE/FDE700?text=51Talk"
   }

@@ -6,9 +6,9 @@ import { Sparkles } from 'lucide-react';
 // CONSTANTS
 // ============================================
 
-// 中东卡通女孩头像 placeholder
+// Middle East girl avatar placeholder
 const ME_GIRL_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer/svg?seed=Sara&backgroundColor=b6e3f4&skinColor=ecad80&hair=long16&hairColor=0e0e0e&eyes=variant01&eyebrows=variant01&mouth=variant01";
-// 课堂开心瞬间截图 placeholder
+// Classroom happy moment screenshot placeholder
 const CLASSROOM_MOMENT_URL = "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3";
 
 // ============================================
@@ -44,10 +44,10 @@ export const SharePosterCTA = ({ studentName, onOpenPoster }: SharePosterCTAProp
               </div>
               <div>
                 <h3 className="text-gray-900 font-bold text-sm leading-tight">
-                  记录 {studentName} 的成长
+                  Capture {studentName}'s Growth
                 </h3>
                 <p className="text-gray-500 text-xs">
-                  生成今日学习日记
+                  Generate Today's Learning Journal
                 </p>
               </div>
             </div>
@@ -60,7 +60,7 @@ export const SharePosterCTA = ({ studentName, onOpenPoster }: SharePosterCTAProp
               className="w-full bg-brand hover:bg-brand/90 text-dark font-bold py-2.5 px-4 rounded-xl shadow-md shadow-brand/20 flex items-center justify-center gap-2 transition-colors text-sm"
             >
               <Sparkles size={16} />
-              <span>生成学习海报</span>
+              <span>Create Learning Poster</span>
             </motion.button>
           </div>
 
@@ -95,3 +95,5 @@ export const SharePosterCTA = ({ studentName, onOpenPoster }: SharePosterCTAProp
 };
 
 export default SharePosterCTA;
+
+

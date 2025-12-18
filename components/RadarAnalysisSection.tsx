@@ -41,21 +41,21 @@ const CustomTick = ({
 
   // Individual adjustments for each label to prevent overlap and align neatly
   switch (payload.value) {
-    case '词汇量':
-      adjustedY += 20; // Move up slightly
+    case 'Vocabulary':
+      adjustedY += 20; // Move down slightly
       break;
-    case '语法':
-      adjustedX -= 5; // Move right
+    case 'Grammar':
+      adjustedX += 5; // Move right
       adjustedY += 15;
       break;
-    case '流利度':
-      adjustedY -= 17; // Move up to align with 互动自信
+    case 'Fluency':
+      adjustedY -= 17; // Move up to align with Confidence
       adjustedX += 5;
       break;
-    case '互动自信':
+    case 'Confidence':
       adjustedX -= 10; // Move left
       break;
-    case '发音':
+    case 'Pronunciation':
       adjustedX -= 20; // Move left more to avoid overlap with chart
       break;
   }
@@ -112,8 +112,8 @@ export const RadarAnalysisSection = ({ radarData, onMetricClick }: RadarAnalysis
   return (
     <section className="px-5 mt-8">
       <div className="bg-surface rounded-2xl p-6 shadow-card relative">
-        <h3 className="text-dark font-bold text-lg mb-1">能力维度分析</h3>
-        <p className="text-gray-400 text-xs mb-6">点击下方图表上的标签查看详细分析</p>
+        <h3 className="text-dark font-bold text-lg mb-1">Skills Analysis</h3>
+        <p className="text-gray-400 text-xs mb-6">Tap the labels below to view detailed feedback</p>
 
         {/* Responsive Radar Chart Container */}
         <div ref={radarContainerRef} className="relative h-80 w-full">
@@ -132,9 +132,9 @@ export const RadarAnalysisSection = ({ radarData, onMetricClick }: RadarAnalysis
 
                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
 
-                {/* Global Average */}
+                {/* 51Talk Average */}
                 <Radar
-                  name="全球平均"
+                  name="51Talk Average"
                   dataKey="average"
                   stroke="#94a3b8"
                   strokeWidth={2}
@@ -167,4 +167,6 @@ export const RadarAnalysisSection = ({ radarData, onMetricClick }: RadarAnalysis
     </section>
   );
 };
+
+
 

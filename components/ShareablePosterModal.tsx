@@ -7,13 +7,13 @@ import html2canvas from 'html2canvas';
 // CONSTANTS
 // ============================================
 
-// 替换为更稳定的 JPG 头像，防止 SVG 截图失败
+// Using more stable JPG avatar to prevent SVG screenshot failures
 const ME_GIRL_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer/svg?seed=Sara&backgroundColor=b6e3f4&skinColor=ecad80&hair=long16&hairColor=0e0e0e&eyes=variant01&eyebrows=variant01&mouth=variant01";
 const CLASSROOM_MOMENT_URL = "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3";
 
 const POSTER_DATA = {
   words: ["Orbit", "Gravity", "Space", "Launch"],
-  score: 98,
+  score: 78,
   comment: "Excellent pronunciation today! Sara did a great job describing the planets.",
   date: new Date().toLocaleDateString('en-US', {
     month: 'short',
@@ -73,7 +73,7 @@ const PosterContent: React.FC<PosterContentProps> = ({ studentName, posterRef, q
             <div className="p-1.5 bg-brand/20 rounded-lg">
               <Camera size={16} className="text-royal" />
             </div>
-            <h3 className="text-royal font-bold text-sm">今日精彩瞬间 Happy Moment</h3>
+            <h3 className="text-royal font-bold text-sm">Happy Moment</h3>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-md border-4 border-white rotate-1 bg-gray-100">
             <img
@@ -91,7 +91,7 @@ const PosterContent: React.FC<PosterContentProps> = ({ studentName, posterRef, q
             <div className="p-1.5 bg-brand/20 rounded-lg">
               <BookOpen size={16} className="text-royal" />
             </div>
-            <h3 className="text-royal font-bold text-sm">今日新词 Today's Words</h3>
+            <h3 className="text-royal font-bold text-sm">Today's Words</h3>
           </div>
           <div className="flex flex-wrap gap-2">
             {POSTER_DATA.words.map((word, idx) => (
@@ -111,7 +111,7 @@ const PosterContent: React.FC<PosterContentProps> = ({ studentName, posterRef, q
             <span className="text-lg text-gray-400 font-medium self-end mb-1">/100</span>
           </div>
           <div className="flex justify-center gap-1 mt-2">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(POSTER_DATA.score >= 80 ? 5 : POSTER_DATA.score >= 60 ? 4 : 3)].map((_, i) => (
               <Star key={i} size={18} className="text-brand fill-brand" />
             ))}
           </div>
@@ -121,7 +121,7 @@ const PosterContent: React.FC<PosterContentProps> = ({ studentName, posterRef, q
         <div className="bg-royal/5 rounded-2xl p-5 border border-royal/10">
           <div className="flex items-center gap-2 mb-2">
             <MessageCircle size={14} className="text-royal" />
-            <span className="text-royal text-xs font-bold">老师寄语 Feedback</span>
+            <span className="text-royal text-xs font-bold">Teacher Feedback</span>
           </div>
           <p className="text-gray-700 text-sm leading-relaxed italic font-medium">
             "{POSTER_DATA.comment}"
@@ -234,7 +234,7 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
         // 2. Fallback for Desktop: Open WhatsApp Web with text
         const text = "Check out Sara's progress on 51Talk!";
         window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-        alert("图片已生成！请手动保存图片并发送到 WhatsApp。");
+        alert("Image generated! Please save manually and send to WhatsApp.");
         // Also trigger download so they have the image
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -316,3 +316,4 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
 };
 
 export default ShareablePosterModal;
+
