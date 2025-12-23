@@ -266,31 +266,28 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
 
   return (
     <>
-      {/* Fixed Bottom Action Bar - RTL Layout */}
+      {/* Fixed Bottom Action Bar - OUTSIDE of AnimatePresence/motion.div to fix 'fixed' positioning */}
       <div
         className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-[999] shadow-[0_-10px_40px_rgba(0,0,0,0.15)]"
-        dir="rtl"
         style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}
       >
         <div className="max-w-md mx-auto flex gap-3">
-          {/* Main CTA: Save/Share - Brand Yellow */}
-          <button
-            onClick={handleDownload}
-            disabled={isGenerating}
-            className="flex-1 bg-brand text-royal font-black text-lg py-4 px-6 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/30 animate-pulse hover:animate-none"
-          >
-            {isGenerating ? <Loader2 className="animate-spin" /> : <Download size={22} strokeWidth={2.5} />}
-            <span>حفظ الصورة</span> {/* Save Image */}
-          </button>
-
-          {/* Secondary: WhatsApp */}
           <button
             onClick={handleShare}
             disabled={isGenerating}
-            className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-green-900/10"
+            className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-green-200"
           >
-            {isGenerating ? <Loader2 className="animate-spin" /> : <WhatsAppIcon size={22} />}
+            {isGenerating ? <Loader2 className="animate-spin" /> : <WhatsAppIcon size={20} />}
             <span>WhatsApp</span>
+          </button>
+
+          <button
+            onClick={handleDownload}
+            disabled={isGenerating}
+            className="flex-1 bg-brand hover:bg-brand/90 text-royal font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/20"
+          >
+            {isGenerating ? <Loader2 className="animate-spin" /> : <Download size={20} />}
+            <span>Save Image</span>
           </button>
         </div>
       </div>
@@ -300,52 +297,27 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-[100] overflow-y-auto"
-          dir="rtl"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] overflow-y-auto"
         >
-          {/* Close Button - Fixed Top Left (RTL) */}
+          {/* Close Button - Fixed Top Right */}
           <button
             onClick={onClose}
-            className="fixed top-5 left-5 z-[150] bg-white/10 p-2.5 rounded-full backdrop-blur-md text-white hover:bg-white/20 transition-all border border-white/10"
+            className="fixed top-4 right-4 z-[150] bg-white/20 p-2 rounded-full backdrop-blur-md text-white hover:bg-white/30 transition-colors"
           >
             <X size={24} />
           </button>
 
           {/* Scrollable Container */}
-          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-40">
-
-            {/* Success Header with Sunburst */}
-            <div className="relative w-full max-w-[340px] text-center mb-8 mt-4">
-              {/* Sunburst Decoration */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none opacity-20">
-                <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_10s_linear_infinite] text-brand">
-                  <path fill="currentColor" d="M100 0 L110 90 L200 100 L110 110 L100 200 L90 110 L0 100 L90 90 Z" />
-                </svg>
-              </div>
-
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="relative z-10"
-              >
-                <div className="inline-flex items-center justify-center p-3 bg-brand rounded-full shadow-glow mb-4">
-                  <Star className="text-royal fill-royal" size={32} />
-                </div>
-                <h2 className="text-2xl font-black text-white mb-1">تم إنشاء الملصق!</h2> {/* Poster Generated! */}
-                <p className="text-blue-200 text-sm">جاهز للمشاركة مع العائلة والأصدقاء</p> {/* Ready to share */}
-              </motion.div>
-            </div>
+          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-32">
 
             {/* POSTER AREA */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
               className="w-full max-w-[340px] relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative rounded-none sm:rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
+              <div className="relative rounded-none sm:rounded-2xl overflow-hidden shadow-2xl">
                 {/* Animation Overlay */}
                 <AnimatePresence>
                   {isScanning && (
