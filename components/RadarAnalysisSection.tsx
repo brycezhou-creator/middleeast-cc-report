@@ -111,7 +111,7 @@ export const RadarAnalysisSection = ({ radarData, onMetricClick }: RadarAnalysis
 
   return (
     <section className="px-5 mt-8">
-      <div className="bg-surface rounded-2xl shadow-card overflow-hidden">
+      <div className="bg-surface backdrop-blur-sm border border-white/20 rounded-2xl shadow-card overflow-hidden">
         {/* Header */}
         <div className="p-4 flex items-center border-b border-gray-100">
           <h3 className="text-dark font-bold flex items-center gap-2">

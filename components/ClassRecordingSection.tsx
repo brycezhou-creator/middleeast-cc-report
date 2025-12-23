@@ -14,7 +14,7 @@ export const ClassRecordingSection = ({ subtitles }: ClassRecordingSectionProps)
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="bg-surface rounded-2xl shadow-card overflow-hidden"
+        className="bg-surface backdrop-blur-sm border border-white/20 rounded-2xl shadow-card overflow-hidden"
       >
         {/* Header */}
         <div className="p-4 flex items-center justify-between border-b border-gray-100">

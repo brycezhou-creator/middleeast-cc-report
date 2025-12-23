@@ -293,7 +293,7 @@ export const CurriculumJourneySection = () => {
     return (
         <section className="px-5 mt-10">
             {/* ====== UNIFIED WHITE CONTAINER ====== */}
-            <div className="bg-surface rounded-2xl shadow-card overflow-hidden">
+            <div className="bg-surface backdrop-blur-sm border border-white/20 rounded-2xl shadow-card overflow-hidden">
 
                 {/* ====== HEADER SECTION ====== */}
                 <div className="p-4 flex items-center justify-between border-b border-gray-100">
