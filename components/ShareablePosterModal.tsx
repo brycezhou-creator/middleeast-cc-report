@@ -249,7 +249,7 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
   if (!isOpen) return null;
 
   return (
-    <>
+    <div dir="rtl">
       {/* Fixed Bottom Action Bar - OUTSIDE of AnimatePresence/motion.div to fix 'fixed' positioning */}
       <div
         className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-[999] shadow-[0_-10px_40px_rgba(0,0,0,0.15)]"
@@ -268,8 +268,11 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
           <button
             onClick={handleDownload}
             disabled={isGenerating}
-            className="flex-1 bg-brand hover:bg-brand/90 text-royal font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/20"
+            className="flex-1 bg-brand hover:bg-brand/90 text-dark font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/20 animate-pulse relative overflow-hidden group"
           >
+            {/* 流光效果 */}
+            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine" />
+
             {isGenerating ? <Loader2 className="animate-spin" /> : <Download size={20} />}
             <span>Save Image</span>
           </button>
@@ -281,18 +284,45 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] overflow-y-auto"
+          className="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] overflow-y-auto"
         >
-          {/* Close Button - Fixed Top Right */}
+          {/* Close Button - Fixed Top Left (RTL) */}
           <button
             onClick={onClose}
-            className="fixed top-4 right-4 z-[150] bg-white/20 p-2 rounded-full backdrop-blur-md text-white hover:bg-white/30 transition-colors"
+            className="fixed top-4 left-4 z-[150] bg-white/10 p-2 rounded-full backdrop-blur-md text-white hover:bg-white/20 transition-colors"
           >
             <X size={24} />
           </button>
 
+          {/* Decorative Sunburst (Top Right) */}
+          <div className="fixed top-0 right-0 pointer-events-none z-0">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="text-brand/10 w-[300px] h-[300px] -mr-20 -mt-20"
+            >
+              <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+                <path d="M50 0L54 40L94 40L58 60L70 98L50 70L30 98L42 60L6 40L46 40Z" />
+              </svg>
+            </motion.div>
+          </div>
+
           {/* Scrollable Container */}
-          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-32">
+          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-32 relative z-10">
+
+            {/* Success Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-8 relative"
+            >
+              <div className="inline-block relative">
+                <h2 className="text-2xl font-bold text-white relative z-10">Generation Success!</h2>
+                {/* Underline/Highlight decoration */}
+                <div className="absolute -bottom-2 right-0 w-full h-3 bg-brand/30 -skew-x-6"></div>
+              </div>
+              <p className="text-gray-400 text-sm mt-2">Your honor poster is ready to share</p>
+            </motion.div>
 
             {/* POSTER AREA */}
             <motion.div
@@ -311,7 +341,7 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
           </div>
         </motion.div>
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
