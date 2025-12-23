@@ -293,27 +293,19 @@ export const CurriculumJourneySection = () => {
     return (
         <section className="px-5 mt-10">
             {/* ====== UNIFIED WHITE CONTAINER ====== */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <div className="bg-surface rounded-2xl shadow-card overflow-hidden">
 
                 {/* ====== HEADER SECTION ====== */}
-                <div className="text-center pt-8 pb-6 px-6 border-b border-gray-50">
-                    <motion.h2
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-royal font-bold text-xl"
-                    >
+                <div className="p-4 flex items-center justify-between border-b border-gray-100">
+                    <h3 className="text-dark font-bold flex items-center gap-2">
+                        <span className="w-2 h-6 bg-brand rounded-full"></span>
                         CEJ Curriculum System
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-gray-500 text-sm mt-1"
-                    >
-                        Global Vision, Individual Focus
-                    </motion.p>
+                    </h3>
+                </div>
+
+                {/* Subtitle / Slogan moved to content area */}
+                <div className="px-6 pt-6 pb-2 text-center">
+                    <p className="text-gray-500 text-sm font-medium">Global Vision, Individual Focus</p>
                 </div>
 
                 {/* ====== ADVANTAGES FEATURE BAR (Collapsible) ====== */}

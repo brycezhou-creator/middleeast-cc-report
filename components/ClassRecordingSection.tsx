@@ -1,16 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, MessageCircle } from 'lucide-react';
-import { ToggleSwitch } from './ToggleSwitch';
 import { Subtitle } from '../data/reportData';
 
 interface ClassRecordingSectionProps {
   subtitles: Subtitle[];
-  isPrivacyOn: boolean;
-  setIsPrivacyOn: (value: boolean) => void;
 }
 
-export const ClassRecordingSection = ({ subtitles, isPrivacyOn, setIsPrivacyOn }: ClassRecordingSectionProps) => {
+export const ClassRecordingSection = ({ subtitles }: ClassRecordingSectionProps) => {
   return (
     <section className="px-5 -mt-20 relative z-20">
       <motion.div
@@ -25,11 +22,6 @@ export const ClassRecordingSection = ({ subtitles, isPrivacyOn, setIsPrivacyOn }
             <span className="w-2 h-6 bg-brand rounded-full"></span>
             Class Recording
           </h3>
-          <ToggleSwitch
-            checked={isPrivacyOn}
-            onChange={setIsPrivacyOn}
-            label={isPrivacyOn ? "Privacy Protected" : "Privacy Mode"}
-          />
         </div>
 
         {/* Video Placeholder */}
@@ -42,29 +34,14 @@ export const ClassRecordingSection = ({ subtitles, isPrivacyOn, setIsPrivacyOn }
 
           {/* Video Overlay */}
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            {!isPrivacyOn ? (
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-                  <Play size={36} className="text-royal ml-1" fill="currentColor" />
-                </div>
-                <div className="bg-black/60 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-md">
-                  Class Recording Video
-                </div>
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                <Play size={36} className="text-royal ml-1" fill="currentColor" />
               </div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col items-center gap-4"
-              >
-                <div className="bg-white/90 p-4 rounded-full shadow-xl">
-                  <span className="text-6xl animate-bounce">🐯</span>
-                </div>
-                <div className="bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur">
-                  Privacy Mode Active: Face Masked
-                </div>
-              </motion.div>
-            )}
+              <div className="bg-black/60 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-md">
+                Class Recording Video
+              </div>
+            </div>
           </div>
         </div>
 
@@ -83,8 +60,8 @@ export const ClassRecordingSection = ({ subtitles, isPrivacyOn, setIsPrivacyOn }
               <span
                 key={sub.id}
                 className={`mx-0.5 ${sub.highlight
-                    ? 'text-royal font-bold bg-[#FDE700]/20 px-1.5 py-0.5 rounded'
-                    : 'text-gray-700'
+                  ? 'text-royal font-bold bg-[#FDE700]/20 px-1.5 py-0.5 rounded'
+                  : 'text-gray-700'
                   }`}
               >
                 {sub.text}

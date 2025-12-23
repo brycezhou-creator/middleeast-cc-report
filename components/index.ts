@@ -1,6 +1,5 @@
 // Base Components
 export { Dialog } from './Dialog';
-export { ToggleSwitch } from './ToggleSwitch';
 
 // Dialog Components
 export { MilestoneDetailDialog } from './MilestoneDetailDialog';

@@ -77,7 +77,9 @@ export interface StudentData {
   name: string;
   avatar: string; // URL
   levelCurrent: string;
+  levelCode: string; // e.g., "L2"
   levelTarget: string;
+  targetLevelCode: string; // e.g., "L3"
   badges: Badge[];
   videoUrl: string;
   subtitles: Subtitle[];
@@ -92,8 +94,10 @@ export interface StudentData {
 export const reportData: StudentData = {
   name: "Sara",
   avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Sara&backgroundColor=b6e3f4&skinColor=ecad80&hair=long16&hairColor=0e0e0e&eyes=variant01&eyebrows=variant01&mouth=variant01",
-  levelCurrent: "Level 2 (Basic Conversation)",
-  levelTarget: "Level 3 (Story Telling)",
+  levelCurrent: "Level 1 (Basic Words)",
+  levelCode: "L1",
+  levelTarget: "Level 4 (Simple Story)",
+  targetLevelCode: "L4",
   badges: [
     { id: "b1", icon: "🌟", label: "Super Speaker", color: "#FDE700" },
     { id: "b2", icon: "🦁", label: "Brave Heart", color: "#FDE700" }

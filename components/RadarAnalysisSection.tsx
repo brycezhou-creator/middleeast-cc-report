@@ -111,57 +111,66 @@ export const RadarAnalysisSection = ({ radarData, onMetricClick }: RadarAnalysis
 
   return (
     <section className="px-5 mt-8">
-      <div className="bg-surface rounded-2xl p-6 shadow-card relative">
-        <h3 className="text-dark font-bold text-lg mb-1">Skills Analysis</h3>
-        <p className="text-gray-400 text-xs mb-6">Tap the labels below to view detailed feedback</p>
+      <div className="bg-surface rounded-2xl shadow-card overflow-hidden">
+        {/* Header */}
+        <div className="p-4 flex items-center border-b border-gray-100">
+          <h3 className="text-dark font-bold flex items-center gap-2">
+            <span className="w-2 h-6 bg-brand rounded-full"></span>
+            Skills Analysis
+          </h3>
+        </div>
 
-        {/* Responsive Radar Chart Container */}
-        <div ref={radarContainerRef} className="relative h-80 w-full">
-          {isRadarInView && (
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="55%" data={radarData}>
-                <PolarGrid stroke="#e2e8f0" strokeDasharray="3 3" />
+        <div className="p-6 relative">
+          <p className="text-gray-400 text-xs mb-6">Tap the labels below to view detailed feedback</p>
 
-                {/* Custom Tick Labels with dynamic positioning */}
-                <PolarAngleAxis
-                  dataKey="subject"
-                  tick={(props) => (
-                    <CustomTick {...props} onMetricClick={onMetricClick} />
-                  )}
-                />
+          {/* Responsive Radar Chart Container */}
+          <div ref={radarContainerRef} className="relative h-80 w-full">
+            {isRadarInView && (
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="55%" data={radarData}>
+                  <PolarGrid stroke="#e2e8f0" strokeDasharray="3 3" />
 
-                <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
+                  {/* Custom Tick Labels with dynamic positioning */}
+                  <PolarAngleAxis
+                    dataKey="subject"
+                    tick={(props) => (
+                      <CustomTick {...props} onMetricClick={onMetricClick} />
+                    )}
+                  />
 
-                {/* 51Talk Average */}
-                <Radar
-                  name="51Talk Average"
-                  dataKey="average"
-                  stroke="#94a3b8"
-                  strokeWidth={2}
-                  strokeDasharray="4 4"
-                  fill="#cbd5e1"
-                  fillOpacity={0.1}
-                  isAnimationActive={true}
-                  animationDuration={1500}
-                  animationEasing="ease-out"
-                />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
 
-                {/* Student */}
-                <Radar
-                  name="Sara"
-                  dataKey="student"
-                  stroke="#FDE700"
-                  strokeWidth={3}
-                  fill="#FDE700"
-                  fillOpacity={0.4}
-                  isAnimationActive={true}
-                  animationDuration={2000}
-                  animationEasing="ease-out"
-                />
-                <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-              </RadarChart>
-            </ResponsiveContainer>
-          )}
+                  {/* 51Talk Average */}
+                  <Radar
+                    name="51Talk Average"
+                    dataKey="average"
+                    stroke="#94a3b8"
+                    strokeWidth={2}
+                    strokeDasharray="4 4"
+                    fill="#cbd5e1"
+                    fillOpacity={0.1}
+                    isAnimationActive={true}
+                    animationDuration={1500}
+                    animationEasing="ease-out"
+                  />
+
+                  {/* Student */}
+                  <Radar
+                    name="Sara"
+                    dataKey="student"
+                    stroke="#FDE700"
+                    strokeWidth={3}
+                    fill="#FDE700"
+                    fillOpacity={0.4}
+                    isAnimationActive={true}
+                    animationDuration={2000}
+                    animationEasing="ease-out"
+                  />
+                  <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                </RadarChart>
+              </ResponsiveContainer>
+            )}
+          </div>
         </div>
       </div>
     </section>

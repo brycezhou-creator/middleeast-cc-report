@@ -7,6 +7,7 @@ import { HeroSection } from './components/HeroSection';
 import { ClassRecordingSection } from './components/ClassRecordingSection';
 import { KnowledgeCarousel } from './components/KnowledgeCarousel';
 import { RadarAnalysisSection } from './components/RadarAnalysisSection';
+import { LevelProgressionMap } from './components/LevelProgressionMap';
 import { CurriculumJourneySection } from './components/CurriculumJourneySection';
 import { TeacherMessageSection } from './components/TeacherMessageSection';
 import { SharePosterCTA } from './components/SharePosterCTA';
@@ -19,7 +20,6 @@ import { ShareablePosterModal } from './components/ShareablePosterModal';
 
 export default function App() {
   // State Management
-  const [isPrivacyOn, setIsPrivacyOn] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState<RadarMetric | null>(null);
   const [isPlanSelectionOpen, setIsPlanSelectionOpen] = useState(false);
   const [isPosterModalOpen, setIsPosterModalOpen] = useState(false);
@@ -43,8 +43,6 @@ export default function App() {
       {/* Class Recording Section */}
       <ClassRecordingSection
         subtitles={reportData.subtitles}
-        isPrivacyOn={isPrivacyOn}
-        setIsPrivacyOn={setIsPrivacyOn}
       />
 
       {/* Knowledge Carousel Section */}
@@ -62,6 +60,12 @@ export default function App() {
       <RadarAnalysisSection
         radarData={reportData.radarData}
         onMetricClick={handleMetricClick}
+      />
+
+      {/* Level Progression Map */}
+      <LevelProgressionMap
+        currentLevel={reportData.levelCode}
+        targetLevel={reportData.targetLevelCode}
       />
 
       {/* CEJ Curriculum Journey Section */}
