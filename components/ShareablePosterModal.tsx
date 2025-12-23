@@ -162,9 +162,25 @@ interface ShareablePosterModalProps {
   };
 }
 
+import { PosterGenerationAnimation } from './PosterGenerationAnimation';
+
+// ... (existing imports)
+
 export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareablePosterModalProps) => {
   const posterRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isScanning, setIsScanning] = useState(true); // Animation state
+
+  // Reset scanning when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setIsScanning(true);
+      const timer = setTimeout(() => {
+        setIsScanning(false);
+      }, 2500); // 2.5s for the animation
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   // Scroll Lock
   useEffect(() => {
@@ -249,32 +265,32 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
   if (!isOpen) return null;
 
   return (
-    <div dir="rtl">
-      {/* Fixed Bottom Action Bar - OUTSIDE of AnimatePresence/motion.div to fix 'fixed' positioning */}
+    <>
+      {/* Fixed Bottom Action Bar - RTL Layout */}
       <div
         className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-[999] shadow-[0_-10px_40px_rgba(0,0,0,0.15)]"
+        dir="rtl"
         style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}
       >
         <div className="max-w-md mx-auto flex gap-3">
-          <button
-            onClick={handleShare}
-            disabled={isGenerating}
-            className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-green-200"
-          >
-            {isGenerating ? <Loader2 className="animate-spin" /> : <WhatsAppIcon size={20} />}
-            <span>WhatsApp</span>
-          </button>
-
+          {/* Main CTA: Save/Share - Brand Yellow */}
           <button
             onClick={handleDownload}
             disabled={isGenerating}
-            className="flex-1 bg-brand hover:bg-brand/90 text-dark font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/20 animate-pulse relative overflow-hidden group"
+            className="flex-1 bg-brand text-royal font-black text-lg py-4 px-6 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-70 shadow-lg shadow-brand/30 animate-pulse hover:animate-none"
           >
-            {/* 流光效果 */}
-            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine" />
+            {isGenerating ? <Loader2 className="animate-spin" /> : <Download size={22} strokeWidth={2.5} />}
+            <span>حفظ الصورة</span> {/* Save Image */}
+          </button>
 
-            {isGenerating ? <Loader2 className="animate-spin" /> : <Download size={20} />}
-            <span>Save Image</span>
+          {/* Secondary: WhatsApp */}
+          <button
+            onClick={handleShare}
+            disabled={isGenerating}
+            className="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-70 shadow-lg shadow-green-900/10"
+          >
+            {isGenerating ? <Loader2 className="animate-spin" /> : <WhatsAppIcon size={22} />}
+            <span>WhatsApp</span>
           </button>
         </div>
       </div>
@@ -284,64 +300,80 @@ export const ShareablePosterModal = ({ isOpen, onClose, posterData }: ShareableP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-[100] overflow-y-auto"
+          className="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-[100] overflow-y-auto"
+          dir="rtl"
         >
           {/* Close Button - Fixed Top Left (RTL) */}
           <button
             onClick={onClose}
-            className="fixed top-4 left-4 z-[150] bg-white/10 p-2 rounded-full backdrop-blur-md text-white hover:bg-white/20 transition-colors"
+            className="fixed top-5 left-5 z-[150] bg-white/10 p-2.5 rounded-full backdrop-blur-md text-white hover:bg-white/20 transition-all border border-white/10"
           >
             <X size={24} />
           </button>
 
-          {/* Decorative Sunburst (Top Right) */}
-          <div className="fixed top-0 right-0 pointer-events-none z-0">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="text-brand/10 w-[300px] h-[300px] -mr-20 -mt-20"
-            >
-              <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
-                <path d="M50 0L54 40L94 40L58 60L70 98L50 70L30 98L42 60L6 40L46 40Z" />
-              </svg>
-            </motion.div>
-          </div>
-
           {/* Scrollable Container */}
-          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-32 relative z-10">
+          <div className="min-h-full flex flex-col items-center py-10 px-4 pb-40">
 
-            {/* Success Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-8 relative"
-            >
-              <div className="inline-block relative">
-                <h2 className="text-2xl font-bold text-white relative z-10">Generation Success!</h2>
-                {/* Underline/Highlight decoration */}
-                <div className="absolute -bottom-2 right-0 w-full h-3 bg-brand/30 -skew-x-6"></div>
+            {/* Success Header with Sunburst */}
+            <div className="relative w-full max-w-[340px] text-center mb-8 mt-4">
+              {/* Sunburst Decoration */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none opacity-20">
+                <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_10s_linear_infinite] text-brand">
+                  <path fill="currentColor" d="M100 0 L110 90 L200 100 L110 110 L100 200 L90 110 L0 100 L90 90 Z" />
+                </svg>
               </div>
-              <p className="text-gray-400 text-sm mt-2">Your honor poster is ready to share</p>
-            </motion.div>
+
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="relative z-10"
+              >
+                <div className="inline-flex items-center justify-center p-3 bg-brand rounded-full shadow-glow mb-4">
+                  <Star className="text-royal fill-royal" size={32} />
+                </div>
+                <h2 className="text-2xl font-black text-white mb-1">تم إنشاء الملصق!</h2> {/* Poster Generated! */}
+                <p className="text-blue-200 text-sm">جاهز للمشاركة مع العائلة والأصدقاء</p> {/* Ready to share */}
+              </motion.div>
+            </div>
 
             {/* POSTER AREA */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
               className="w-full max-w-[340px] relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <PosterContent
-                studentName={posterData.studentName}
-                posterRef={posterRef}
-                qrCodeUrl={posterData.qrCodeUrl}
-              />
+              <div className="relative rounded-none sm:rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
+                {/* Animation Overlay */}
+                <AnimatePresence>
+                  {isScanning && (
+                    <motion.div
+                      initial={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 z-50"
+                    >
+                      <PosterGenerationAnimation />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Actual Poster Content */}
+                <div className={isScanning ? 'filter blur-sm duration-500' : 'duration-500'}>
+                  <PosterContent
+                    studentName={posterData.studentName}
+                    posterRef={posterRef}
+                    qrCodeUrl={posterData.qrCodeUrl}
+                  />
+                </div>
+              </div>
             </motion.div>
 
           </div>
         </motion.div>
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 
