@@ -1,6 +1,6 @@
 import React from 'react';
-import { TrendingUp, Lightbulb } from 'lucide-react';
-import { Dialog } from './Dialog';
+import { X, ClipboardList, Lightbulb } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RadarMetric } from '../data/reportData';
 
 interface MetricDetailDialogProps {
@@ -9,60 +9,138 @@ interface MetricDetailDialogProps {
   metric: RadarMetric;
 }
 
-export const MetricDetailDialog = ({ isOpen, onClose, metric }: MetricDetailDialogProps) => {
-  // Calculate realistic percentile based on student vs average comparison
-  // Formula: percentile = 50 - (student - average) * 0.5
-  // This means: if student = average, percentile = 50%
-  // If student > average by 10, percentile = 45% (better ranking)
-  // If student < average by 10, percentile = 55% (worse ranking)
-  const calculatePercentile = () => {
-    const diff = metric.student - metric.average;
-    let percentile = 50 - (diff * 0.5);
-    // Clamp between 10% and 90% for realism
-    percentile = Math.max(10, Math.min(90, percentile));
-    return percentile.toFixed(0);
-  };
+// Circular Progress Component - 使用宝贝黄 #FDE700
+const CircularProgress = ({ percentage, size = 100 }: { percentage: number; size?: number }) => {
+  const strokeWidth = 8;
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <Dialog isOpen={isOpen} onClose={onClose} title={`${metric.subject} Analysis`}>
-      <div className="space-y-4">
-        <div className="flex items-center justify-between bg-royal/5 p-4 rounded-xl">
-          <div>
-            <div className="text-xs text-gray-500 uppercase font-bold tracking-wider">Current Score</div>
-            <div className="text-3xl font-bold text-royal">{metric.student}<span className="text-sm text-gray-400 font-normal">/100</span></div>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-gray-500 mb-1">51Talk Ranking</div>
-            <div className="inline-flex items-center gap-1 bg-success/10 text-success text-xs font-bold px-2 py-1 rounded-full">
-              <TrendingUp size={12} />
-              Top {calculatePercentile()}%
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <h4 className="text-sm font-bold text-dark flex items-center gap-2">
-            <span className="w-1 h-4 bg-brand rounded-full"></span>
-            Detailed Assessment
-          </h4>
-          <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-lg border border-gray-100">
-            {metric.analysis || "Excellent performance! Keep it up!"}
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <h4 className="text-sm font-bold text-dark flex items-center gap-2">
-            <Lightbulb size={14} className="text-brand fill-brand" />
-            Improvement Tips
-          </h4>
-          <p className="text-sm text-royal bg-brand/10 p-3 rounded-lg border border-brand/20">
-            {metric.tip || "Increase reading practice to maintain language sense."}
-          </p>
-        </div>
+    <div className="relative" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="transform -rotate-90">
+        {/* Background circle */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="#E5E7EB"
+          strokeWidth={strokeWidth}
+        />
+        {/* Progress circle - 宝贝黄 #FDE700 */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="#FDE700"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          className="transition-all duration-1000 ease-out"
+        />
+      </svg>
+      {/* Center text */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-lg font-black text-royal">Top {percentage}%</span>
       </div>
-    </Dialog>
+    </div>
   );
 };
 
+export const MetricDetailDialog = ({ isOpen, onClose, metric }: MetricDetailDialogProps) => {
+  // Calculate realistic percentile based on student vs average comparison
+  const calculatePercentile = () => {
+    const diff = metric.student - metric.average;
+    let percentile = 50 - (diff * 0.5);
+    percentile = Math.max(10, Math.min(90, percentile));
+    return Math.round(percentile);
+  };
 
+  const percentile = calculatePercentile();
 
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200]"
+          />
+
+          {/* Modal - 左对齐布局 (LTR) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            dir="ltr"
+            className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-md sm:w-full max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl z-[201]"
+          >
+            {/* Close Button - Top Right for LTR */}
+            <button
+              onClick={onClose}
+              className="absolute top-3 right-3 z-10 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            >
+              <X size={18} className="text-gray-500" />
+            </button>
+
+            {/* Content Container - 左对齐 */}
+            <div className="p-5 space-y-4">
+
+              {/* Header: Title - 左对齐 */}
+              <div className="text-left pt-1">
+                <h2 className="text-xl font-bold text-royal">
+                  {metric.subject} Analysis
+                </h2>
+              </div>
+
+              {/* Hero Section: Circular Progress - 左对齐 */}
+              <div className="bg-royal/5 rounded-2xl p-4 flex flex-col items-start">
+                <p className="text-xs text-gray-500 mb-2 font-medium">51Talk Ranking</p>
+                <div className="w-full flex justify-center">
+                  <CircularProgress percentage={percentile} size={100} />
+                </div>
+              </div>
+
+              {/* Module A: Detailed Assessment - 左对齐 */}
+              <div className="bg-white border border-royal/10 rounded-2xl p-4 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 bg-royal/10 rounded-lg">
+                    <ClipboardList size={16} className="text-royal" />
+                  </div>
+                  <h3 className="text-sm font-bold text-dark">Detailed Assessment</h3>
+                </div>
+                <p className="text-gray-600 leading-relaxed text-sm text-left">
+                  {metric.analysis || "Excellent performance! Keep up the great work and continue practicing regularly."}
+                </p>
+              </div>
+
+              {/* Module B: Improvement Tips - 左对齐 */}
+              <div className="bg-brand/10 border border-brand/30 rounded-2xl p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 bg-brand/20 rounded-lg">
+                    <Lightbulb size={16} className="text-brand fill-brand" />
+                  </div>
+                  <h3 className="text-sm font-bold text-dark">Improvement Tips</h3>
+                </div>
+                <p className="text-royal leading-relaxed text-sm text-left">
+                  {metric.tip || "Continue practicing with native speakers and focus on daily conversation exercises."}
+                </p>
+              </div>
+
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default MetricDetailDialog;

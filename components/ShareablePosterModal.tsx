@@ -102,20 +102,7 @@ const PosterContent: React.FC<PosterContentProps> = ({ studentName, posterRef, q
           </div>
         </div>
 
-        {/* Score */}
-        <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-2xl p-5 text-center shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-16 h-16 bg-brand/10 rounded-bl-full" />
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-1">Class Score</p>
-          <div className="flex items-center justify-center gap-1.5">
-            <span className="text-5xl font-black text-royal">{POSTER_DATA.score}</span>
-            <span className="text-lg text-gray-400 font-medium self-end mb-1">/100</span>
-          </div>
-          <div className="flex justify-center gap-1 mt-2">
-            {[...Array(POSTER_DATA.score >= 80 ? 5 : POSTER_DATA.score >= 60 ? 4 : 3)].map((_, i) => (
-              <Star key={i} size={18} className="text-brand fill-brand" />
-            ))}
-          </div>
-        </div>
+
 
         {/* Feedback */}
         <div className="bg-royal/5 rounded-2xl p-5 border border-royal/10">
